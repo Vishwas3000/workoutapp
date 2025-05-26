@@ -94,15 +94,19 @@ class ExerciseCell: UITableViewCell {
 
     // Add set tracking buttons
     for setNumber in 1...exercise.sets {
-      let setView = createSetView(setNumber: setNumber)
+      let setView = createSetView(setNumber: Int(setNumber))
       completedSetsStackView.addArrangedSubview(setView)
     }
 
     // Show completed sets
     for completedSet in exercise.completedSets {
-      if let setView = completedSetsStackView.arrangedSubviews[completedSet.setNumber - 1]
-        as? SetTrackingView
-      {
+      if let setView = completedSetsStackView.arrangedSubviews.first(where: { view in
+        if let setTrackingView = view as? SetTrackingView {
+          return setTrackingView.setNumber
+            == Int(completedSet.value(forKey: "setNumber") as? Int16 ?? 0)
+        }
+        return false
+      }) as? SetTrackingView {
         setView.configure(with: completedSet)
       }
     }

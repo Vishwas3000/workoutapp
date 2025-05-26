@@ -125,7 +125,7 @@ class SetTrackingView: UIView {
 
     let context = PersistenceController.shared.container.viewContext
     let completedSet = CompletedSet.create(context: context, reps: reps, weight: weight)
-    completedSet.setNumber = Int16(setNumber)
+    completedSet.setValue(Int16(setNumber), forKey: "setNumber")
 
     delegate?.didCompleteSet(completedSet)
     isCompleted = true

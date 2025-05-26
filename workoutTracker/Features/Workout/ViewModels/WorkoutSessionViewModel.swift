@@ -33,7 +33,7 @@ class WorkoutSessionViewModel {
   func endWorkout() {
     guard isWorkoutActive else { return }
 
-    workoutSession?.duration = Int16(Date().timeIntervalSince(workoutSession?.date ?? Date()))
+      workoutSession?.duration = Int32(Date().timeIntervalSince(workoutSession?.date ?? Date()))
     workoutDay.isCompleted = true
     workoutDay.date = Date()
 
